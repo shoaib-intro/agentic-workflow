@@ -7,11 +7,12 @@ from crewai import Agent
 from langchain_openai import ChatOpenAI
 from typing import List
 from ..tools.dynatrace_mcp_tools import (
-    GetProblemsTool,
-    GetProblemDetailsTool,
-    GetSecurityProblemsTool,
+    ListProblemsTool,
+    ListVulnerabilitiesTool,
     ExecuteDQLTool,
-    GetLogsForEntityTool
+    FindEntityByNameTool,
+    GetEnvironmentInfoTool,
+    GenerateDQLTool
 )
 
 
@@ -42,8 +43,8 @@ def create_problem_analyst_agent() -> Agent:
             "that application owners can understand and act upon."
         ),
         tools=[
-            GetProblemsTool(),
-            GetProblemDetailsTool()
+            ListProblemsTool(),
+            GetEnvironmentInfoTool()
         ],
         llm=create_llm(temperature=0.3),
         verbose=True,
@@ -71,7 +72,7 @@ def create_security_analyst_agent() -> Agent:
             "that non-security personnel can understand and act upon."
         ),
         tools=[
-            GetSecurityProblemsTool()
+            ListVulnerabilitiesTool()
         ],
         llm=create_llm(temperature=0.3),
         verbose=True,
@@ -100,7 +101,8 @@ def create_log_analyst_agent() -> Agent:
         ),
         tools=[
             ExecuteDQLTool(),
-            GetLogsForEntityTool()
+            GenerateDQLTool(),
+            FindEntityByNameTool()
         ],
         llm=create_llm(temperature=0.4),
         verbose=True,
