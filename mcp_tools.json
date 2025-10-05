@@ -1,0 +1,264 @@
+[
+  {
+    "name": "get_environment_info",
+    "description": "Get information about the connected Dynatrace Environment (Tenant) and verify the connection and authentication",
+    "parameters": []
+  },
+  {
+    "name": "execute_dql",
+    "description": "Get Logs, Metrics, Spans or Events from Dynatrace GRAIL by executing a Dynatrace Query Language (DQL) statement",
+    "parameters": [
+      {
+        "name": "dqlStatement",
+        "type": "string",
+        "required": true,
+        "description": "The DQL query to execute"
+      },
+      {
+        "name": "timeframe",
+        "type": "string",
+        "required": false,
+        "description": "Time range for the query"
+      }
+    ]
+  },
+  {
+    "name": "verify_dql",
+    "description": "Syntactically verify a Dynatrace Query Language (DQL) statement before executing it",
+    "parameters": [
+      {
+        "name": "dqlStatement",
+        "type": "string",
+        "required": true,
+        "description": "The DQL query to verify"
+      }
+    ]
+  },
+  {
+    "name": "list_problems",
+    "description": "List all problems (dt.davis.problems) known on Dynatrace, sorted by recency, for the last 12h",
+    "parameters": [
+      {
+        "name": "additionalFilter",
+        "type": "string",
+        "required": false,
+        "description": "DQL-based filter for specific entities"
+      },
+      {
+        "name": "maxProblemsToDisplay",
+        "type": "number",
+        "required": false,
+        "description": "Maximum number of problems to display (default: 25)"
+      }
+    ]
+  },
+  {
+    "name": "list_vulnerabilities",
+    "description": "Retrieve all active (non-muted) vulnerabilities from Dynatrace for the last 30 days",
+    "parameters": [
+      {
+        "name": "riskScore",
+        "type": "number",
+        "required": false,
+        "description": "Minimum risk score threshold (default: 8.0)"
+      },
+      {
+        "name": "additionalFilter",
+        "type": "string",
+        "required": false,
+        "description": "DQL-based filter"
+      },
+      {
+        "name": "maxVulnerabilitiesToDisplay",
+        "type": "number",
+        "required": false,
+        "description": "Maximum to display (default: 25)"
+      }
+    ]
+  },
+  {
+    "name": "find_entity_by_name",
+    "description": "Find the entityId and type of a monitored entity (service, host, process-group, application, kubernetes-node, etc.) based on name",
+    "parameters": [
+      {
+        "name": "entityName",
+        "type": "string",
+        "required": true,
+        "description": "Name of the entity to find"
+      }
+    ]
+  },
+  {
+    "name": "get_ownership",
+    "description": "Get detailed Ownership information for one or multiple entities on Dynatrace",
+    "parameters": [
+      {
+        "name": "entityIds",
+        "type": "array",
+        "required": true,
+        "description": "List of entity IDs"
+      }
+    ]
+  },
+  {
+    "name": "generate_dql_from_natural_language",
+    "description": "Convert natural language queries to Dynatrace Query Language (DQL) using Davis CoPilot AI",
+    "parameters": [
+      {
+        "name": "naturalLanguageQuery",
+        "type": "string",
+        "required": true,
+        "description": "Your question in plain English"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "required": false,
+        "description": "Additional context for better results"
+      }
+    ]
+  },
+  {
+    "name": "explain_dql_in_natural_language",
+    "description": "Explain Dynatrace Query Language (DQL) statements in natural language using Davis CoPilot AI",
+    "parameters": [
+      {
+        "name": "dqlStatement",
+        "type": "string",
+        "required": true,
+        "description": "The DQL query to explain"
+      }
+    ]
+  },
+  {
+    "name": "chat_with_davis_copilot",
+    "description": "Ask any Dynatrace-related question when no other specific tool is available",
+    "parameters": [
+      {
+        "name": "message",
+        "type": "string",
+        "required": true,
+        "description": "Your question"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "required": false,
+        "description": "Additional context"
+      }
+    ]
+  },
+  {
+    "name": "send_slack_message",
+    "description": "Send a Slack message to a dedicated Slack Channel via Slack Connector on Dynatrace",
+    "parameters": [
+      {
+        "name": "message",
+        "type": "string",
+        "required": true,
+        "description": "The message to send"
+      },
+      {
+        "name": "channelId",
+        "type": "string",
+        "required": true,
+        "description": "Slack channel ID"
+      }
+    ]
+  },
+  {
+    "name": "send_email",
+    "description": "Send an email using the Dynatrace Email API",
+    "parameters": [
+      {
+        "name": "to",
+        "type": "array",
+        "required": true,
+        "description": "Recipient email addresses"
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "required": true,
+        "description": "Email subject"
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "required": true,
+        "description": "Email body (supports HTML)"
+      },
+      {
+        "name": "cc",
+        "type": "array",
+        "required": false,
+        "description": "CC recipients"
+      },
+      {
+        "name": "bcc",
+        "type": "array",
+        "required": false,
+        "description": "BCC recipients"
+      }
+    ]
+  },
+  {
+    "name": "create_workflow_for_notification",
+    "description": "Create a notification workflow for a team based on a problem type within Workflows in Dynatrace",
+    "parameters": [
+      {
+        "name": "problemType",
+        "type": "string",
+        "required": true,
+        "description": "Type of problem to monitor"
+      },
+      {
+        "name": "notificationChannel",
+        "type": "string",
+        "required": true,
+        "description": "Where to send notifications"
+      },
+      {
+        "name": "teamName",
+        "type": "string",
+        "required": true,
+        "description": "Team to notify"
+      }
+    ]
+  },
+  {
+    "name": "make_workflow_public",
+    "description": "Modify a workflow and make it publicly available to everyone on the Dynatrace Environment",
+    "parameters": [
+      {
+        "name": "workflowId",
+        "type": "string",
+        "required": true,
+        "description": "ID of the workflow to modify"
+      }
+    ]
+  },
+  {
+    "name": "get_kubernetes_events",
+    "description": "Get all events from a specific Kubernetes (K8s) cluster",
+    "parameters": [
+      {
+        "name": "clusterName",
+        "type": "string",
+        "required": true,
+        "description": "Name of the Kubernetes cluster"
+      },
+      {
+        "name": "timeframe",
+        "type": "string",
+        "required": false,
+        "description": "Time range for events"
+      }
+    ]
+  },
+  {
+    "name": "reset_grail_budget",
+    "description": "Reset the Grail query budget after it was exhausted, allowing new queries to be executed",
+    "parameters": []
+  }
+]
