@@ -10,9 +10,10 @@ from ..tools.dynatrace_mcp_tools import (
     ListProblemsTool,
     ListVulnerabilitiesTool,
     ExecuteDQLTool,
+    GenerateDQLTool,
     FindEntityByNameTool,
-    GetEnvironmentInfoTool,
-    GenerateDQLTool
+    ChatWithDavisCopilotTool,
+    GetEnvironmentInfoTool
 )
 
 
@@ -44,6 +45,7 @@ def create_problem_analyst_agent() -> Agent:
         ),
         tools=[
             ListProblemsTool(),
+            FindEntityByNameTool(),
             GetEnvironmentInfoTool()
         ],
         llm=create_llm(temperature=0.3),
@@ -72,7 +74,8 @@ def create_security_analyst_agent() -> Agent:
             "that non-security personnel can understand and act upon."
         ),
         tools=[
-            ListVulnerabilitiesTool()
+            ListVulnerabilitiesTool(),
+            FindEntityByNameTool()
         ],
         llm=create_llm(temperature=0.3),
         verbose=True,
@@ -102,7 +105,8 @@ def create_log_analyst_agent() -> Agent:
         tools=[
             ExecuteDQLTool(),
             GenerateDQLTool(),
-            FindEntityByNameTool()
+            FindEntityByNameTool(),
+            ChatWithDavisCopilotTool()
         ],
         llm=create_llm(temperature=0.4),
         verbose=True,
